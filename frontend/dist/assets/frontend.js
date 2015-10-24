@@ -21,6 +21,42 @@ define('frontend/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initia
   exports['default'] = App;
 
 });
+define('frontend/components/fa-icon', ['exports', 'ember-cli-font-awesome/components/fa-icon'], function (exports, fa_icon) {
+
+	'use strict';
+
+
+
+	exports.default = fa_icon.default;
+
+});
+define('frontend/components/fa-list-icon', ['exports', 'ember-cli-font-awesome/components/fa-list-icon'], function (exports, fa_list_icon) {
+
+	'use strict';
+
+
+
+	exports.default = fa_list_icon.default;
+
+});
+define('frontend/components/fa-list', ['exports', 'ember-cli-font-awesome/components/fa-list'], function (exports, fa_list) {
+
+	'use strict';
+
+
+
+	exports.default = fa_list.default;
+
+});
+define('frontend/components/fa-stack', ['exports', 'ember-cli-font-awesome/components/fa-stack'], function (exports, fa_stack) {
+
+	'use strict';
+
+
+
+	exports.default = fa_stack.default;
+
+});
 define('frontend/controllers/array', ['exports', 'ember'], function (exports, Ember) {
 
 	'use strict';
@@ -33,6 +69,94 @@ define('frontend/controllers/object', ['exports', 'ember'], function (exports, E
 	'use strict';
 
 	exports['default'] = Ember['default'].Controller;
+
+});
+define('frontend/index/route', ['exports', 'ember'], function (exports, Ember) {
+
+    'use strict';
+
+    exports['default'] = Ember['default'].Route.extend({
+
+        beforeModel: function beforeModel() {},
+
+        model: function model() {
+            return {};
+        },
+
+        afterModel: function afterModel() {
+            return {};
+        },
+
+        setupController: function setupController(controller, model) {
+            this._super(controller, model);
+            var self = this;
+
+            Ember['default'].run.later(function () {
+
+                Ember['default'].$.ajax({
+                    url: 'api/login',
+                    type: 'GET'
+                }).then(function (rawUser) {
+                    //200 user has session
+
+                    self.store.pushPayload({
+                        self: {
+                            id: 123,
+                            name: 'aaron hardcoded'
+                        }
+                    });
+
+                    self.transitionTo('decide');
+                }, function (fail) {
+                    //401 response
+                    self.transitionTo('login');
+                });
+
+                self.transitionTo('login');
+            }, 2000);
+        }
+
+    });
+
+});
+define('frontend/index/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.8",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 6
+          }
+        },
+        "moduleName": "frontend/index/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("Splash");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes() { return []; },
+      statements: [
+
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
 
 });
 define('frontend/initializers/app-version', ['exports', 'frontend/config/environment', 'ember'], function (exports, config, Ember) {
@@ -92,17 +216,143 @@ define('frontend/initializers/export-application-global', ['exports', 'ember', '
   };
 
 });
-define('frontend/router', ['exports', 'ember', 'frontend/config/environment'], function (exports, Ember, config) {
+define('frontend/login/controller', ['exports', 'ember'], function (exports, Ember) {
+
+    'use strict';
+
+    exports['default'] = Ember['default'].Controller.extend({
+
+        actions: {
+
+            loginFb: function loginFb() {
+                FB.login(function (resp) {
+                    if (resp.status === 'connected') {
+                        Ember['default'].$.ajax({
+                            url: "api/login", //not using facebook's omniauth. couldn't overcome issues
+                            type: "POST",
+                            data: resp.authResponse
+
+                        }).then(function (success) {}, function (fail) {});
+                    }
+                }
+                //, {scope: 'public_profile'}
+                );
+            }
+        }
+
+    });
+
+});
+define('frontend/login/route', ['exports', 'ember'], function (exports, Ember) {
+
+    'use strict';
+
+    exports['default'] = Ember['default'].Route.extend({
+
+        beforeModel: function beforeModel() {}
+
+    });
+
+});
+define('frontend/login/template', ['exports'], function (exports) {
 
   'use strict';
 
-  var Router = Ember['default'].Router.extend({
-    location: config['default'].locationType
-  });
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.8",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 5,
+            "column": 9
+          }
+        },
+        "moduleName": "frontend/login/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("Sign-in page\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("button");
+        dom.setAttribute(el1,"class","auth facebook-bg");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("i");
+        dom.setAttribute(el2,"class","fa fa-facebook");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode(" Log in with Facebook\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [1]);
+        var morphs = new Array(1);
+        morphs[0] = dom.createElementMorph(element0);
+        return morphs;
+      },
+      statements: [
+        ["element","action",["loginFb"],[],["loc",[null,[3,33],[3,53]]]]
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
 
-  Router.map(function () {});
+});
+define('frontend/models/self', ['exports', 'ember', 'ember-data'], function (exports, Ember, DS) {
 
-  exports['default'] = Router;
+    'use strict';
+
+    exports['default'] = DS['default'].Model.extend({
+
+        name: DS['default'].attr('string')
+
+    });
+
+});
+define('frontend/router', ['exports', 'ember', 'frontend/config/environment'], function (exports, Ember, config) {
+
+    'use strict';
+
+    var Router = Ember['default'].Router.extend({
+        location: config['default'].locationType
+    });
+
+    Router.map(function () {
+
+        this.route('/');
+
+        this.route('login');
+    });
+
+    exports['default'] = Router;
+
+});
+define('frontend/routes/application', ['exports', 'ember'], function (exports, Ember) {
+
+    'use strict';
+
+    exports['default'] = Ember['default'].Route.extend({
+
+        beforeModel: function beforeModel() {
+            FB.init({
+                appId: '1009508355780156',
+                //xfbml      : true,
+                version: 'v2.4'
+            });
+        }
+
+    });
 
 });
 define('frontend/templates/application', ['exports'], function (exports) {
@@ -120,8 +370,8 @@ define('frontend/templates/application', ['exports'], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 4,
-            "column": 0
+            "line": 2,
+            "column": 10
           }
         },
         "moduleName": "frontend/templates/application.hbs"
@@ -131,26 +381,20 @@ define('frontend/templates/application', ['exports'], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("h2");
-        dom.setAttribute(el1,"id","title");
-        var el2 = dom.createTextNode("Welcome to Ember.js");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
+        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment,2,2,contextualElement);
+        morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+        dom.insertBoundary(fragment, null);
         return morphs;
       },
       statements: [
-        ["content","outlet",["loc",[null,[3,0],[3,10]]]]
+        ["content","outlet",["loc",[null,[2,0],[2,10]]]]
       ],
       locals: [],
       templates: []
@@ -225,6 +469,46 @@ define('frontend/tests/helpers/start-app.jshint', function () {
   });
 
 });
+define('frontend/tests/index/route.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - index');
+  test('index/route.js should pass jshint', function() { 
+    ok(false, 'index/route.js should pass jshint.\nindex/route.js: line 37, col 44, Missing semicolon.\nindex/route.js: line 27, col 30, \'rawUser\' is defined but never used.\nindex/route.js: line 39, col 25, \'fail\' is defined but never used.\n\n3 errors'); 
+  });
+
+});
+define('frontend/tests/login/controller.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - login');
+  test('login/controller.js should pass jshint', function() { 
+    ok(false, 'login/controller.js should pass jshint.\nlogin/controller.js: line 1, col 26, Missing semicolon.\nlogin/controller.js: line 8, col 13, \'FB\' is not defined.\nlogin/controller.js: line 15, col 38, \'success\' is defined but never used.\nlogin/controller.js: line 17, col 33, \'fail\' is defined but never used.\n\n4 errors'); 
+  });
+
+});
+define('frontend/tests/login/route.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - login');
+  test('login/route.js should pass jshint', function() { 
+    ok(false, 'login/route.js should pass jshint.\nlogin/route.js: line 1, col 26, Missing semicolon.\n\n1 error'); 
+  });
+
+});
+define('frontend/tests/models/self.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - models');
+  test('models/self.js should pass jshint', function() { 
+    ok(false, 'models/self.js should pass jshint.\nmodels/self.js: line 1, col 8, \'Ember\' is defined but never used.\n\n1 error'); 
+  });
+
+});
 define('frontend/tests/router.jshint', function () {
 
   'use strict';
@@ -232,6 +516,16 @@ define('frontend/tests/router.jshint', function () {
   module('JSHint - .');
   test('router.js should pass jshint', function() { 
     ok(true, 'router.js should pass jshint.'); 
+  });
+
+});
+define('frontend/tests/routes/application.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - routes');
+  test('routes/application.js should pass jshint', function() { 
+    ok(false, 'routes/application.js should pass jshint.\nroutes/application.js: line 7, col 9, \'FB\' is not defined.\n\n1 error'); 
   });
 
 });
@@ -280,7 +574,7 @@ catch(err) {
 if (runningTests) {
   require("frontend/tests/test-helper");
 } else {
-  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.2c128ba4"});
+  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.7aa90e75"});
 }
 
 /* jshint ignore:end */

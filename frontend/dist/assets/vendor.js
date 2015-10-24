@@ -87546,6 +87546,128 @@ define("ember-cli-content-security-policy", ["ember-cli-content-security-policy/
   });
 });
 
+define("ember-cli-font-awesome", ["ember-cli-font-awesome/index", "ember", "exports"], function(__index__, __Ember__, __exports__) {
+  "use strict";
+  __Ember__["default"].keys(__index__).forEach(function(key){
+    __exports__[key] = __index__[key];
+  });
+});
+
+define('ember-cli-font-awesome/components/fa-icon', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  var computed = Ember['default'].computed;
+
+  exports['default'] = Ember['default'].Component.extend({
+    tagName: 'i',
+
+    classNames: ['fa'],
+
+    classNameBindings: ['iconCssClass', 'flipCssClass', 'rotateCssClass', 'sizeCssClass', 'pullCssClass', 'stackCssClass', 'spin:fa-spin', 'fixedWidth:fa-fw', 'listItem:fa-li', 'border:fa-border', 'pulse:fa-pulse', 'inverse:fa-inverse'],
+
+    attributeBindings: ['ariaHiddenAttribute:aria-hidden', 'title'],
+
+    iconCssClass: computed('icon', function () {
+      var icon = this.get('icon');
+      if (icon) {
+        return icon.match(/^fa-/) ? icon : 'fa-' + icon;
+      }
+    }),
+
+    flipCssClass: computed('flip', function () {
+      var flip = this.get('flip');
+      if (flip) {
+        return flip.match(/^fa-flip/) ? flip : 'fa-flip-' + flip;
+      }
+    }),
+
+    rotateCssClass: computed('rotate', function () {
+      var rotate = this.get('rotate');
+      if (rotate) {
+        return rotate.match(/^fa-rotate/) ? rotate : 'fa-rotate-' + rotate;
+      }
+    }),
+
+    sizeCssClass: computed('size', function () {
+      var size = this.get('size');
+      if (size) {
+        if (size.match(/^fa-/)) {
+          return size;
+        } else {
+          return size.match(/(?:lg|x)$/) ? 'fa-' + size : 'fa-' + size + 'x';
+        }
+      }
+    }),
+
+    pullCssClass: computed('pull', function () {
+      var pull = this.get('pull');
+      if (pull) {
+        return 'fa-pull-' + pull;
+      }
+    }),
+
+    stackCssClass: computed('stack', function () {
+      var stack = this.get('stack');
+      if (stack) {
+        if (stack.match(/^fa-/)) {
+          return stack;
+        } else {
+          return stack.match(/x$/) ? 'fa-stack-' + stack : 'fa-stack-' + stack + 'x';
+        }
+      }
+    }),
+
+    ariaHiddenAttribute: computed('ariaHidden', function () {
+      var ariaHidden = this.get('ariaHidden');
+      return ariaHidden !== false ? true : undefined;
+    })
+  });
+
+});
+define('ember-cli-font-awesome/components/fa-list-icon', ['exports', 'ember-cli-font-awesome/components/fa-icon'], function (exports, FaIcon) {
+
+	'use strict';
+
+	exports['default'] = FaIcon['default'].extend({ listItem: true });
+
+});
+define('ember-cli-font-awesome/components/fa-list', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  exports['default'] = Ember['default'].Component.extend({
+    tagName: 'ul',
+    classNames: 'fa-ul'
+  });
+
+});
+define('ember-cli-font-awesome/components/fa-stack', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  var computed = Ember['default'].computed;
+
+  exports['default'] = Ember['default'].Component.extend({
+    tagName: 'span',
+
+    classNames: 'fa-stack',
+
+    classNameBindings: ['sizeCssClass'],
+
+    sizeCssClass: computed('size', function () {
+      var size = this.get('size');
+      if (size) {
+        if (size.match(/^fa-/)) {
+          return size;
+        } else {
+          return size.match(/(?:lg|x)$/) ? 'fa-' + size : 'fa-' + size + 'x';
+        }
+      }
+    })
+  });
+
+});
 ;/* jshint ignore:start */
 
 

@@ -1,3 +1,42 @@
 @import "settings";
 
 @import "foundation";
+
+@mixin transitionAll($sec){
+  -webkit-transition: all $sec linear;
+  -moz-transition: all $sec linear;
+  -ms-transition: all $sec linear;
+  -o-transition: all $sec linear;
+  transition: all $sec linear;
+}
+
+
+@mixin responsiveBg($color){
+  background-color: $color;
+  &:hover, &:focus{
+    background-color: darken($color, 10%) !important;
+    color: darken(white, 10%) !important;
+    @include transitionAll(0.3s);
+  }
+}
+
+
+.auth {
+  cursor: pointer;
+  padding: 7pt 5pt 4pt;
+  width: 185pt;
+  color: white;
+  border-radius: 4pt;
+  font-size: 10pt;
+  margin: 8pt auto;
+
+  .fa {
+    font-size: 15pt;
+    vertical-align: middle;
+    padding-right: 5pt;
+  }
+}
+
+.facebook-bg {
+  @include responsiveBg(#3b5998);
+}
