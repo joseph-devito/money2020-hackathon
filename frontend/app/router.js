@@ -13,6 +13,7 @@ Router.map(function() {
 
     this.route('join-game');
     this.route('new-game');
+    this.route('settle');
 
 });
 

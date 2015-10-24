@@ -4,11 +4,16 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
     beforeModel: function(){
-        FB.init({
-            appId: '1009508355780156',
-            //xfbml      : true,
-            version    : 'v2.4'
-        });
+
+    },
+
+
+    actions: {
+
+        didTransition: function () {
+            $('body').hide();
+            $('body').fadeIn();
+        }
     }
 
 });

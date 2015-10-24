@@ -374,41 +374,9 @@ define('frontend/index/route', ['exports', 'ember'], function (exports, Ember) {
 
     exports['default'] = Ember['default'].Route.extend({
 
-        beforeModel: function beforeModel() {},
-
-        model: function model() {
-            return {};
-        },
-
-        afterModel: function afterModel() {
-            return {};
-        },
-
-        setupController: function setupController(controller, model) {
-            this._super(controller, model);
+        beforeModel: function beforeModel() {
             var self = this;
-
             Ember['default'].run.later(function () {
-
-                Ember['default'].$.ajax({
-                    url: '/anydapi/login',
-                    type: 'GET'
-                }).then(function (rawUser) {
-                    //200 user has session
-
-                    self.store.pushPayload({
-                        self: {
-                            id: 123,
-                            name: 'aaron hardcoded'
-                        }
-                    });
-
-                    self.transitionTo('decide');
-                }, function (fail) {
-                    //401 response
-                    self.transitionTo('login');
-                });
-
                 self.transitionTo('login');
             }, 2000);
         }
@@ -513,6 +481,29 @@ define('frontend/initializers/export-application-global', ['exports', 'ember', '
   };
 
 });
+define('frontend/join-game/controller', ['exports'], function (exports) {
+
+    'use strict';
+
+    exports['default'] = Ember.Controller.extend({
+
+        gameCode: "",
+
+        //this function is fired everytime gameCode changes
+        observeCode: Ember.observer('gameCode', function () {
+
+            if (this.gameCode.trim().length != 4) return;
+
+            //make ajax call
+
+            //Ember.$.ajax({
+            //
+            //})
+        })
+
+    });
+
+});
 define('frontend/join-game/template', ['exports'], function (exports) {
 
   'use strict';
@@ -528,8 +519,8 @@ define('frontend/join-game/template', ['exports'], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 8,
-            "column": 14
+            "line": 5,
+            "column": 24
           }
         },
         "moduleName": "frontend/join-game/template.hbs"
@@ -543,13 +534,26 @@ define('frontend/join-game/template', ['exports'], function (exports) {
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("br");
         dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n\n/index.php\n\n\n/api/index.php");
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("label");
+        var el2 = dom.createTextNode("Enter Code");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() { return []; },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment,5,5,contextualElement);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
       statements: [
-
+        ["inline","input",[],["value",["subexpr","@mut",[["get","gameCode",["loc",[null,[5,14],[5,22]]]]],[],[]]],["loc",[null,[5,0],[5,24]]]]
       ],
       locals: [],
       templates: []
@@ -567,37 +571,29 @@ define('frontend/login/controller', ['exports', 'ember'], function (exports, Emb
 
             loginFb: function loginFb() {
                 var self = this;
-                FB.login(function (resp) {
-                    if (resp.status === 'connected') {
-                        Ember['default'].$.ajax({
-                            url: "/api/login",
-                            type: "POST",
-                            data: resp.authResponse
 
-                        }).then(function (success) {
+                //have server give me the user profile
+                Ember['default'].$.ajax({
+                    url: "/api/login",
+                    type: "GET"
 
-                            self.store.pushPayload({ self: success.user });
-                            self.transitionTo('decide');
-                        }, function (fail) {});
-                    }
-                }
-                //, {scope: 'public_profile'}
-                );
+                }).then(function (success) {
+
+                    self.store.pushPayload({ self: success.user });
+
+                    self.transitionTo('decide');
+                }, function (fail) {});
             }
         }
 
     });
 
 });
-define('frontend/login/route', ['exports', 'ember'], function (exports, Ember) {
+define('frontend/login/route', ['exports'], function (exports) {
 
-    'use strict';
+	'use strict';
 
-    exports['default'] = Ember['default'].Route.extend({
-
-        beforeModel: function beforeModel() {}
-
-    });
+	exports['default'] = Ember.Route.extend({});
 
 });
 define('frontend/login/template', ['exports'], function (exports) {
@@ -666,6 +662,35 @@ define('frontend/models/self', ['exports', 'ember-data'], function (exports, DS)
     });
 
 });
+define('frontend/new-game/controller', ['exports'], function (exports) {
+
+    'use strict';
+
+    exports['default'] = Ember.Controller.extend({
+
+        occasion: "",
+        amount: "",
+
+        actions: {
+
+            //didTransition: {
+            //
+            //},
+
+            play: function play() {
+                //ajax call to server to kick off
+
+            },
+
+            settle: function settle() {
+                //ajax call, transition to
+            }
+
+        }
+
+    });
+
+});
 define('frontend/new-game/template', ['exports'], function (exports) {
 
   'use strict';
@@ -681,8 +706,8 @@ define('frontend/new-game/template', ['exports'], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 1,
-            "column": 8
+            "line": 15,
+            "column": 0
           }
         },
         "moduleName": "frontend/new-game/template.hbs"
@@ -692,13 +717,61 @@ define('frontend/new-game/template', ['exports'], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createTextNode("New Game");
+        var el1 = dom.createTextNode("New Game\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("label");
+        var el2 = dom.createTextNode("Occasion");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("br");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("label");
+        var el2 = dom.createTextNode("Amount");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("button");
+        var el2 = dom.createTextNode("play");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("button");
+        var el2 = dom.createTextNode("settle");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() { return []; },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [11]);
+        var element1 = dom.childAt(fragment, [13]);
+        var morphs = new Array(4);
+        morphs[0] = dom.createMorphAt(fragment,3,3,contextualElement);
+        morphs[1] = dom.createMorphAt(fragment,9,9,contextualElement);
+        morphs[2] = dom.createElementMorph(element0);
+        morphs[3] = dom.createElementMorph(element1);
+        return morphs;
+      },
       statements: [
-
+        ["inline","input",[],["value",["subexpr","@mut",[["get","occasion",["loc",[null,[4,14],[4,22]]]]],[],[]]],["loc",[null,[4,0],[4,24]]]],
+        ["inline","input",[],["value",["subexpr","@mut",[["get","amount",["loc",[null,[9,14],[9,20]]]]],[],[]]],["loc",[null,[9,0],[9,22]]]],
+        ["element","action",["play"],[],["loc",[null,[11,8],[11,25]]]],
+        ["element","action",["settle"],[],["loc",[null,[13,8],[13,27]]]]
       ],
       locals: [],
       templates: []
@@ -722,6 +795,7 @@ define('frontend/router', ['exports', 'ember', 'frontend/config/environment'], f
 
         this.route('join-game');
         this.route('new-game');
+        this.route('settle');
     });
 
     exports['default'] = Router;
@@ -733,12 +807,14 @@ define('frontend/routes/application', ['exports', 'ember'], function (exports, E
 
     exports['default'] = Ember['default'].Route.extend({
 
-        beforeModel: function beforeModel() {
-            FB.init({
-                appId: '1009508355780156',
-                //xfbml      : true,
-                version: 'v2.4'
-            });
+        beforeModel: function beforeModel() {},
+
+        actions: {
+
+            didTransition: function didTransition() {
+                $('body').hide();
+                $('body').fadeIn();
+            }
         }
 
     });
@@ -874,7 +950,17 @@ define('frontend/tests/index/route.jshint', function () {
 
   module('JSHint - index');
   test('index/route.js should pass jshint', function() { 
-    ok(false, 'index/route.js should pass jshint.\nindex/route.js: line 36, col 44, Missing semicolon.\nindex/route.js: line 26, col 30, \'rawUser\' is defined but never used.\nindex/route.js: line 38, col 25, \'fail\' is defined but never used.\n\n3 errors'); 
+    ok(false, 'index/route.js should pass jshint.\nindex/route.js: line 9, col 39, Missing semicolon.\n\n1 error'); 
+  });
+
+});
+define('frontend/tests/join-game/controller.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - join-game');
+  test('join-game/controller.js should pass jshint', function() { 
+    ok(false, 'join-game/controller.js should pass jshint.\njoin-game/controller.js: line 8, col 44, Expected \'!==\' and instead saw \'!=\'.\njoin-game/controller.js: line 9, col 13, Expected \'{\' and instead saw \'return\'.\njoin-game/controller.js: line 1, col 16, \'Ember\' is not defined.\njoin-game/controller.js: line 6, col 18, \'Ember\' is not defined.\n\n4 errors'); 
   });
 
 });
@@ -884,7 +970,7 @@ define('frontend/tests/login/controller.jshint', function () {
 
   module('JSHint - login');
   test('login/controller.js should pass jshint', function() { 
-    ok(false, 'login/controller.js should pass jshint.\nlogin/controller.js: line 1, col 26, Missing semicolon.\nlogin/controller.js: line 9, col 13, \'FB\' is not defined.\nlogin/controller.js: line 21, col 33, \'fail\' is defined but never used.\n\n3 errors'); 
+    ok(false, 'login/controller.js should pass jshint.\nlogin/controller.js: line 1, col 26, Missing semicolon.\nlogin/controller.js: line 21, col 25, \'fail\' is defined but never used.\n\n2 errors'); 
   });
 
 });
@@ -894,7 +980,7 @@ define('frontend/tests/login/route.jshint', function () {
 
   module('JSHint - login');
   test('login/route.js should pass jshint', function() { 
-    ok(false, 'login/route.js should pass jshint.\nlogin/route.js: line 1, col 26, Missing semicolon.\n\n1 error'); 
+    ok(false, 'login/route.js should pass jshint.\nlogin/route.js: line 1, col 16, \'Ember\' is not defined.\n\n1 error'); 
   });
 
 });
@@ -905,6 +991,16 @@ define('frontend/tests/models/self.jshint', function () {
   module('JSHint - models');
   test('models/self.js should pass jshint', function() { 
     ok(true, 'models/self.js should pass jshint.'); 
+  });
+
+});
+define('frontend/tests/new-game/controller.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - new-game');
+  test('new-game/controller.js should pass jshint', function() { 
+    ok(false, 'new-game/controller.js should pass jshint.\nnew-game/controller.js: line 1, col 16, \'Ember\' is not defined.\n\n1 error'); 
   });
 
 });
@@ -924,7 +1020,7 @@ define('frontend/tests/routes/application.jshint', function () {
 
   module('JSHint - routes');
   test('routes/application.js should pass jshint', function() { 
-    ok(false, 'routes/application.js should pass jshint.\nroutes/application.js: line 7, col 9, \'FB\' is not defined.\n\n1 error'); 
+    ok(false, 'routes/application.js should pass jshint.\nroutes/application.js: line 14, col 13, \'$\' is not defined.\nroutes/application.js: line 15, col 13, \'$\' is not defined.\n\n2 errors'); 
   });
 
 });
@@ -973,7 +1069,7 @@ catch(err) {
 if (runningTests) {
   require("frontend/tests/test-helper");
 } else {
-  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.bec721c1"});
+  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.343b8a3c"});
 }
 
 /* jshint ignore:end */

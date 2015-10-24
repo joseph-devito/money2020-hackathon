@@ -6,25 +6,22 @@ export default Ember.Controller.extend({
 
         loginFb: function(){
             var self = this;
-            FB.login(function(resp){
-                if (resp.status === 'connected') {
-                    Ember.$.ajax({
-                        url: "/api/login",
-                        type: "POST",
-                        data: resp.authResponse
 
-                    }).then(function(success) {
+            //have server give me the user profile
+            Ember.$.ajax({
+                url: "/api/login",
+                type: "GET"
 
-                        self.store.pushPayload({self: success.user});
-                        self.transitionTo('decide');
+            }).then(function(success) {
 
-                    }, function(fail){
+                self.store.pushPayload({self: success.user});
 
-                    });
-                }
-            }
-                //, {scope: 'public_profile'}
-            );
+                self.transitionTo('decide');
+
+            }, function(fail){
+
+            });
+
         }
     }
 
