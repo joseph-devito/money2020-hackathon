@@ -574,7 +574,7 @@ catch(err) {
 if (runningTests) {
   require("frontend/tests/test-helper");
 } else {
-  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.7aa90e75"});
+  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.87e41af8"});
 }
 
 /* jshint ignore:end */
