@@ -18,11 +18,10 @@ export default Ember.Route.extend({
         this._super(controller, model);
         var self = this;
 
-
         Ember.run.later(function(){
 
             Ember.$.ajax({
-                url: 'api/login',
+                url: '/api/login',
                 type: 'GET'
             }).then(function(rawUser){
                 //200 user has session

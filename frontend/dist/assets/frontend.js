@@ -71,6 +71,303 @@ define('frontend/controllers/object', ['exports', 'ember'], function (exports, E
 	exports['default'] = Ember['default'].Controller;
 
 });
+define('frontend/decide/controller', ['exports'], function (exports) {
+
+    'use strict';
+
+    exports['default'] = Ember.Controller.extend({
+
+        actions: {}
+
+    });
+
+});
+define('frontend/decide/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.8",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 4,
+              "column": 48
+            }
+          },
+          "moduleName": "frontend/decide/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("New Game");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() { return []; },
+        statements: [
+
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    var child1 = (function() {
+      return {
+        meta: {
+          "revision": "Ember@1.13.8",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 50
+            }
+          },
+          "moduleName": "frontend/decide/template.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("Join Game");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() { return []; },
+        statements: [
+
+        ],
+        locals: [],
+        templates: []
+      };
+    }());
+    var child2 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.8",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 14,
+                "column": 12
+              },
+              "end": {
+                "line": 16,
+                "column": 12
+              }
+            },
+            "moduleName": "frontend/decide/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("                paid ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["content","h.amount",["loc",[null,[15,21],[15,33]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      var child1 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.8",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 16,
+                "column": 12
+              },
+              "end": {
+                "line": 18,
+                "column": 12
+              }
+            },
+            "moduleName": "frontend/decide/template.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("                saved ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment,1,1,contextualElement);
+            return morphs;
+          },
+          statements: [
+            ["content","h.amount",["loc",[null,[17,22],[17,34]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
+      return {
+        meta: {
+          "revision": "Ember@1.13.8",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 8,
+              "column": 0
+            },
+            "end": {
+              "line": 22,
+              "column": 0
+            }
+          },
+          "moduleName": "frontend/decide/template.hbs"
+        },
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("\n    ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("tr");
+          var el2 = dom.createTextNode("\n        ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n        ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n        ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("td");
+          var el3 = dom.createTextNode("\n");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("        ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element0 = dom.childAt(fragment, [1]);
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]),0,0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]),0,0);
+          morphs[2] = dom.createMorphAt(dom.childAt(element0, [5]),1,1);
+          return morphs;
+        },
+        statements: [
+          ["content","h.name",["loc",[null,[11,12],[11,22]]]],
+          ["content","h.date",["loc",[null,[12,12],[12,22]]]],
+          ["block","if",[["get","h.selected",["loc",[null,[14,18],[14,28]]]]],[],0,1,["loc",[null,[14,12],[18,19]]]]
+        ],
+        locals: ["h"],
+        templates: [child0, child1]
+      };
+    }());
+    return {
+      meta: {
+        "revision": "Ember@1.13.8",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 22,
+            "column": 9
+          }
+        },
+        "moduleName": "frontend/decide/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("What do you want to do?\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("br");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(3);
+        morphs[0] = dom.createMorphAt(fragment,3,3,contextualElement);
+        morphs[1] = dom.createMorphAt(fragment,5,5,contextualElement);
+        morphs[2] = dom.createMorphAt(fragment,7,7,contextualElement);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [
+        ["block","link-to",["new-game"],["tagName","button"],0,null,["loc",[null,[4,0],[4,60]]]],
+        ["block","link-to",["join-game"],["tagName","button"],1,null,["loc",[null,[5,0],[5,62]]]],
+        ["block","each",[["get","history",["loc",[null,[8,8],[8,15]]]]],[],2,null,["loc",[null,[8,0],[22,9]]]]
+      ],
+      locals: [],
+      templates: [child0, child1, child2]
+    };
+  }()));
+
+});
 define('frontend/index/route', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
@@ -94,7 +391,7 @@ define('frontend/index/route', ['exports', 'ember'], function (exports, Ember) {
             Ember['default'].run.later(function () {
 
                 Ember['default'].$.ajax({
-                    url: 'api/login',
+                    url: '/anydapi/login',
                     type: 'GET'
                 }).then(function (rawUser) {
                     //200 user has session
@@ -216,6 +513,50 @@ define('frontend/initializers/export-application-global', ['exports', 'ember', '
   };
 
 });
+define('frontend/join-game/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.8",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 8,
+            "column": 14
+          }
+        },
+        "moduleName": "frontend/join-game/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("Join Game\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("br");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n\n/index.php\n\n\n/api/index.php");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes() { return []; },
+      statements: [
+
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
+
+});
 define('frontend/login/controller', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
@@ -225,14 +566,19 @@ define('frontend/login/controller', ['exports', 'ember'], function (exports, Emb
         actions: {
 
             loginFb: function loginFb() {
+                var self = this;
                 FB.login(function (resp) {
                     if (resp.status === 'connected') {
                         Ember['default'].$.ajax({
-                            url: "api/login", //not using facebook's omniauth. couldn't overcome issues
+                            url: "/api/login",
                             type: "POST",
                             data: resp.authResponse
 
-                        }).then(function (success) {}, function (fail) {});
+                        }).then(function (success) {
+
+                            self.store.pushPayload({ self: success.user });
+                            self.transitionTo('decide');
+                        }, function (fail) {});
                     }
                 }
                 //, {scope: 'public_profile'}
@@ -309,7 +655,7 @@ define('frontend/login/template', ['exports'], function (exports) {
   }()));
 
 });
-define('frontend/models/self', ['exports', 'ember', 'ember-data'], function (exports, Ember, DS) {
+define('frontend/models/self', ['exports', 'ember-data'], function (exports, DS) {
 
     'use strict';
 
@@ -318,6 +664,46 @@ define('frontend/models/self', ['exports', 'ember', 'ember-data'], function (exp
         name: DS['default'].attr('string')
 
     });
+
+});
+define('frontend/new-game/template', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      meta: {
+        "revision": "Ember@1.13.8",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 8
+          }
+        },
+        "moduleName": "frontend/new-game/template.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("New Game");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes() { return []; },
+      statements: [
+
+      ],
+      locals: [],
+      templates: []
+    };
+  }()));
 
 });
 define('frontend/router', ['exports', 'ember', 'frontend/config/environment'], function (exports, Ember, config) {
@@ -330,9 +716,12 @@ define('frontend/router', ['exports', 'ember', 'frontend/config/environment'], f
 
     Router.map(function () {
 
-        this.route('/');
-
+        this.route('/'); //splash
         this.route('login');
+        this.route('decide');
+
+        this.route('join-game');
+        this.route('new-game');
     });
 
     exports['default'] = Router;
@@ -412,6 +801,16 @@ define('frontend/tests/app.jshint', function () {
   });
 
 });
+define('frontend/tests/decide/controller.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - decide');
+  test('decide/controller.js should pass jshint', function() { 
+    ok(false, 'decide/controller.js should pass jshint.\ndecide/controller.js: line 1, col 16, \'Ember\' is not defined.\n\n1 error'); 
+  });
+
+});
 define('frontend/tests/helpers/resolver', ['exports', 'ember/resolver', 'frontend/config/environment'], function (exports, Resolver, config) {
 
   'use strict';
@@ -475,7 +874,7 @@ define('frontend/tests/index/route.jshint', function () {
 
   module('JSHint - index');
   test('index/route.js should pass jshint', function() { 
-    ok(false, 'index/route.js should pass jshint.\nindex/route.js: line 37, col 44, Missing semicolon.\nindex/route.js: line 27, col 30, \'rawUser\' is defined but never used.\nindex/route.js: line 39, col 25, \'fail\' is defined but never used.\n\n3 errors'); 
+    ok(false, 'index/route.js should pass jshint.\nindex/route.js: line 36, col 44, Missing semicolon.\nindex/route.js: line 26, col 30, \'rawUser\' is defined but never used.\nindex/route.js: line 38, col 25, \'fail\' is defined but never used.\n\n3 errors'); 
   });
 
 });
@@ -485,7 +884,7 @@ define('frontend/tests/login/controller.jshint', function () {
 
   module('JSHint - login');
   test('login/controller.js should pass jshint', function() { 
-    ok(false, 'login/controller.js should pass jshint.\nlogin/controller.js: line 1, col 26, Missing semicolon.\nlogin/controller.js: line 8, col 13, \'FB\' is not defined.\nlogin/controller.js: line 15, col 38, \'success\' is defined but never used.\nlogin/controller.js: line 17, col 33, \'fail\' is defined but never used.\n\n4 errors'); 
+    ok(false, 'login/controller.js should pass jshint.\nlogin/controller.js: line 1, col 26, Missing semicolon.\nlogin/controller.js: line 9, col 13, \'FB\' is not defined.\nlogin/controller.js: line 21, col 33, \'fail\' is defined but never used.\n\n3 errors'); 
   });
 
 });
@@ -505,7 +904,7 @@ define('frontend/tests/models/self.jshint', function () {
 
   module('JSHint - models');
   test('models/self.js should pass jshint', function() { 
-    ok(false, 'models/self.js should pass jshint.\nmodels/self.js: line 1, col 8, \'Ember\' is defined but never used.\n\n1 error'); 
+    ok(true, 'models/self.js should pass jshint.'); 
   });
 
 });
@@ -574,7 +973,7 @@ catch(err) {
 if (runningTests) {
   require("frontend/tests/test-helper");
 } else {
-  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.87e41af8"});
+  require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0.bec721c1"});
 }
 
 /* jshint ignore:end */

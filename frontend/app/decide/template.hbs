@@ -1,0 +1,22 @@
+What do you want to do?
+<br>
+
+{{#link-to 'new-game' tagName='button'}}New Game{{/link-to}}
+{{#link-to 'join-game' tagName='button'}}Join Game{{/link-to}}
+
+
+{{#each history as |h|}}
+
+    <tr>
+        <td>{{h.name}}</td>
+        <td>{{h.date}}</td>
+        <td>
+            {{#if h.selected}}
+                paid {{h.amount}}
+            {{else}}
+                saved {{h.amount}}
+            {{/if}}
+        </td>
+    </tr>
+
+{{/each}}

@@ -7,9 +7,12 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
 
-    this.route('/');
-
+    this.route('/'); //splash
     this.route('login');
+    this.route('decide');
+
+    this.route('join-game');
+    this.route('new-game');
 
 });
 
